@@ -1,0 +1,712 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ECharts</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22e694d5-ea46-80a7-8f9d-f93b7340a89e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🥽</span></div><h1 class="page-title">ECharts</h1><p class="page-description"></p></header><div class="page-body"><p id="22e694d5-ea46-8019-b71b-fce56b202fb5" class="">
+</p><p id="22e694d5-ea46-80ff-8512-c7a815eb5fe5" class=""><strong><span style="border-bottom:0.05em solid">001-获取Echarts</span></strong></p><ul id="22e694d5-ea46-8052-894a-ef2bcb241022" class="bulleted-list"><li style="list-style-type:disc">GitHub：<ul id="22e694d5-ea46-80d9-93d7-c8011d036a77" class="bulleted-list"><li style="list-style-type:circle"><a href="https://github.com/apache/echarts/releases">https://github.com/apache/echarts/releases</a></li></ul></li></ul><ul id="22e694d5-ea46-804a-9ae8-f1d0337575b1" class="bulleted-list"><li style="list-style-type:disc">npm：<ul id="22e694d5-ea46-8062-b53b-d1f3e36ee2fa" class="bulleted-list"><li style="list-style-type:circle">npm instal echarts</li></ul></li></ul><ul id="22e694d5-ea46-806a-bb89-dcde4d5771cd" class="bulleted-list"><li style="list-style-type:disc">CDN：<ul id="22e694d5-ea46-8066-888f-c7d64de940c7" class="bulleted-list"><li style="list-style-type:circle">jsDelivr：<a href="https://www.jsdelivr.com/package/npm/echarts">https://www.jsdelivr.com/package/npm/echarts</a></li></ul><ul id="22e694d5-ea46-80ea-84ce-ca444e671545" class="bulleted-list"><li style="list-style-type:circle">unpkg：<a href="https://app.unpkg.com/echarts@5.6.0">https://app.unpkg.com/echarts@5.6.0</a></li></ul><ul id="22e694d5-ea46-8044-9a79-d0555652b853" class="bulleted-list"><li style="list-style-type:circle">cdnjs：<a href="https://cdnjs.com/libraries/echarts">https://cdnjs.com/libraries/echarts</a></li></ul></li></ul><p id="22e694d5-ea46-80d2-b8fc-ff719ac48698" class="">
+</p><p id="22e694d5-ea46-808b-a8d2-c6b9ffe940d1" class=""><strong><span style="border-bottom:0.05em solid">002-在项目中引入Echarts</span></strong></p><ul id="22e694d5-ea46-805e-8445-f12b272708e5" class="bulleted-list"><li style="list-style-type:disc">NPM安装Echarts<ul id="22e694d5-ea46-8054-a765-d1d87f1139b5" class="bulleted-list"><li style="list-style-type:circle">npm install echarts —save</li></ul></li></ul><ul id="22e694d5-ea46-8052-b06a-f5a97a88fde0" class="bulleted-list"><li style="list-style-type:disc">引入Echarts<ul id="22e694d5-ea46-800a-b085-cecbf3da7d7b" class="bulleted-list"><li style="list-style-type:circle">imporr * as echarts from ‘echarts’；</li></ul></li></ul><ul id="22e694d5-ea46-8049-9d6f-fd74376b811d" class="bulleted-list"><li style="list-style-type:disc">按需引入Echarts图表或组件<ul id="22e694d5-ea46-80f7-b39e-e6137e504a7b" class="bulleted-list"><li style="list-style-type:circle">import {BarChart} from ‘echarts/charts’；</li></ul></li></ul><ul id="22e694d5-ea46-80a9-8f86-e96d5f663285" class="bulleted-list"><li style="list-style-type:disc">TS中按需引入（可使用接口组合）<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22e694d5-ea46-80e4-a185-e533f2d2300e" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">importtype {
+  // 系列类型的定义后缀都为 SeriesOption
+  BarSeriesOption,
+  LineSeriesOption
+}from &#x27;echarts/charts&#x27;;</code></pre></li></ul><p id="22e694d5-ea46-8037-bf18-e1f88a01e1d4" class="">
+</p><p id="22e694d5-ea46-80c3-9a37-c5a04f6f4a87" class=""><mark class="highlight-teal"><strong><span style="border-bottom:0.05em solid">以下为Echarts的使用</span></strong></mark></p><p id="22e694d5-ea46-8051-af85-ebccce86f0f8" class=""><strong><span style="border-bottom:0.05em solid">003-图表容器以及大小</span></strong></p><p id="22e694d5-ea46-808a-a463-d199f0f89a05" class="">A：初始化<div class="indented"><ul id="22e694d5-ea46-807e-b097-cffd5b108666" class="bulleted-list"><li style="list-style-type:disc">在HTML中定义具有宽高的父容器<ul id="22e694d5-ea46-8048-9fc2-c777f7d107cc" class="bulleted-list"><li style="list-style-type:circle">传入该图表时，大小默认为父节点大小</li></ul><p id="22e694d5-ea46-8021-bb0e-da17e02dafa5" class="">&lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;<br/>&lt;script type=&quot;text/javascript&quot;&gt;<br/>var myChart = echarts.init(document.getElementById(&#x27;main&#x27;));<br/>&lt;/script&gt;<br/></p></li></ul><ul id="22e694d5-ea46-80ec-a403-d525089ec200" class="bulleted-list"><li style="list-style-type:disc">指定图表的大小<ul id="22e694d5-ea46-8093-a70a-c91c048de998" class="bulleted-list"><li style="list-style-type:circle">如果图表容器不存在宽度和高度，或者希望图表宽高不等于容器大小，可以在初始化时指定大小</li></ul><p id="22e694d5-ea46-80fb-a051-ef53d66d02e3" class="">&lt;div id=&quot;main&quot;&gt;&lt;/div&gt;<br/>&lt;script type=&quot;text/javascript&quot;&gt;<br/>var myChart = echarts.init(document.getElementById(&#x27;main&#x27;), null, {<br/>width: 600,<br/>height: 400<br/>});<br/>&lt;/script&gt;<br/></p></li></ul></div></p><p id="22e694d5-ea46-8083-beb6-f98870dbcb3c" class="">B：相应容器大小的变化<div class="indented"><ul id="22e694d5-ea46-806a-9aa6-db759e596d23" class="bulleted-list"><li style="list-style-type:disc">通过监听页面变化，图表大小随容器大小而改变<p id="22e694d5-ea46-80e5-9f60-f7739c37fa4b" class="">&lt;style&gt;<br/>#main,<br/>html,<br/>body {<br/>width: 100%;<br/>}<br/>#main {<br/>height: 400px;<br/>}<br/>&lt;/style&gt;<br/>&lt;div id=&quot;main&quot;&gt;&lt;/div&gt;<br/>&lt;script type=&quot;text/javascript&quot;&gt;<br/>var myChart = echarts.init(document.getElementById(&#x27;main&#x27;));<br/>window.addEventListener(&#x27;resize&#x27;, function() {<br/><br/><strong>myChart.resize();   重新渲染适应页面</strong><br/>});<br/>&lt;/script&gt;<br/></p></li></ul><ul id="22e694d5-ea46-809a-a2b5-efc6977862a1" class="bulleted-list"><li style="list-style-type:disc">为图表设定特定的大小<p id="22e694d5-ea46-8025-bd1c-c009ed54ac19" class="">myChart.resize({<br/>width: 800,<br/>height: 400<br/>});<br/></p></li></ul></div></p><p id="22e694d5-ea46-80e2-8721-e8a1fd0f78ab" class="">C：容器节点被销毁以及被重渲染时<div class="indented"><ul id="22e694d5-ea46-80ad-add4-f39a7bb22201" class="bulleted-list"><li style="list-style-type:disc">假设页面存在多个标签页，每个标签页都包含图表，当选中一个标签页时，其他标签页内容在DOM中被移除了，这与当用户再选中这些标签页时，就发现图表不见了</li></ul></div></p><ul id="22e694d5-ea46-807d-a9bc-eba78eabb8b9" class="bulleted-list"><li style="list-style-type:disc"><strong>本质是由于图表的容器节点被移除导致的，即使该节点之后被重新添加，图标所在的节点也不存在了。</strong><ul id="22e694d5-ea46-8003-aab2-e3ad35e86c74" class="bulleted-list"><li style="list-style-type:circle">正确的做法，在图表容器被销毁之后，调用echartsInstance.dispose销毁实例，在表容器被重新渲染后再次调用echarts的初始化构建</li></ul></li></ul><p id="22e694d5-ea46-80de-b6ea-e3b3c3f9c0e7" class="">
+</p><p id="22e694d5-ea46-8049-9fe4-f5ef85a1dd3b" class=""><strong><span style="border-bottom:0.05em solid">004-Echarts样式主题</span></strong></p><ul id="22e694d5-ea46-80c4-8e00-c14b33ef1bfe" class="bulleted-list"><li style="list-style-type:disc">颜色主题（Theme）</li></ul><ul id="22e694d5-ea46-8032-abd0-db372a1f2504" class="bulleted-list"><li style="list-style-type:disc">调色盘</li></ul><ul id="22e694d5-ea46-802a-93dc-f94ba08a54de" class="bulleted-list"><li style="list-style-type:disc">直接样式设置（itemStyle、lineStyle、areaStyle…）</li></ul><ul id="22e694d5-ea46-8066-a5cd-e72ca04898aa" class="bulleted-list"><li style="list-style-type:disc">视觉映射（visualMap）</li></ul><p id="22e694d5-ea46-803a-8ad6-f188ad6dd574" class="">A：颜色主题<div class="indented"><ul id="22e694d5-ea46-80ec-9d18-d7ce6b58cf50" class="bulleted-list"><li style="list-style-type:disc">最简单的改变全局样式的方法</li></ul><ul id="22e694d5-ea46-80b1-87a0-ca070970ddc6" class="bulleted-list"><li style="list-style-type:disc">切换深色主题<ul id="22e694d5-ea46-8086-b88c-faa58e35db80" class="bulleted-list"><li style="list-style-type:circle">var chart = echarts.init（dom，‘dark’）</li></ul></li></ul><ul id="22e694d5-ea46-80c3-a492-d41722425360" class="bulleted-list"><li style="list-style-type:disc">其他的主题，没有内置在Echarts中，需要自己加载，这些主题可以在主题编辑器中访问。<a href="https://echarts.apache.org/zh/theme-builder.html">https://echarts.apache.org/zh/theme-builder.html</a><ul id="22e694d5-ea46-8007-bc27-fe4479c4f114" class="bulleted-list"><li style="list-style-type:circle">保存为JS文件，直接引入即可</li></ul><ul id="22e694d5-ea46-8094-8054-c03682670c9a" class="bulleted-list"><li style="list-style-type:circle">保存为JSON文件，需要自行加载和注册<p id="22e694d5-ea46-800c-8d82-fcd09f970cdc" class="">// 假设主题名称是 &quot;vintage&quot;<br/>fetch(&#x27;theme/vintage.json&#x27;)<br/>    .then(r =&gt; r.json())<br/>    .then(theme =&gt; {<br/>        echarts.registerTheme(&#x27;vintage&#x27;, theme);<br/>        var chart = echarts.init(dom, &#x27;vintage&#x27;);<br/>})<br/></p></li></ul></li></ul></div></p><p id="22e694d5-ea46-80a7-aa96-effdf4db68f6" class="">B：调色盘<div class="indented"><ul id="22e694d5-ea46-803d-ba03-fc1e9f73d36d" class="bulleted-list"><li style="list-style-type:disc">可以在option中设置，给定一组颜色，图形、系列会自动从其中选择颜色，也可以设置全局的调色盘<p id="22e694d5-ea46-8043-b74a-cb66519291c7" class="">option = {<br/>// 全局调色盘。<br/>color: [<br/>&#x27;#c23531&#x27;,<br/>&#x27;#2f4554&#x27;,<br/>&#x27;#61a0a8&#x27;,<br/>&#x27;#d48265&#x27;,<br/>&#x27;#91c7ae&#x27;,<br/>&#x27;#749f83&#x27;,<br/>&#x27;#ca8622&#x27;,<br/>&#x27;#bda29a&#x27;,<br/>&#x27;#6e7074&#x27;,<br/>&#x27;#546570&#x27;,<br/>&#x27;#c4ccd3&#x27;<br/>],<br/></p><p id="22e694d5-ea46-80b4-b253-edef8a24f70d" class="">series: [<br/>{<br/>type: &#x27;bar&#x27;,<br/>// 此系列自己的调色盘。<br/>color: [<br/>&#x27;#dd6b66&#x27;,<br/>&#x27;#759aa0&#x27;,<br/>&#x27;#e69d87&#x27;,<br/>&#x27;#8dc1a9&#x27;,<br/>&#x27;#ea7e53&#x27;,<br/>&#x27;#eedd78&#x27;,<br/>&#x27;#73a373&#x27;,<br/>&#x27;#73b9bc&#x27;,<br/>&#x27;#7289ab&#x27;,<br/>&#x27;#91ca8c&#x27;,<br/>&#x27;#f49f42&#x27;<br/>]<br/>// ...<br/>},<br/>{<br/>type: &#x27;pie&#x27;,<br/>// 此系列自己的调色盘。<br/>color: [<br/>&#x27;#37A2DA&#x27;,<br/>&#x27;#32C5E9&#x27;,<br/>&#x27;#67E0E3&#x27;,<br/>&#x27;#9FE6B8&#x27;,<br/>&#x27;#FFDB5C&#x27;,<br/>&#x27;#ff9f7f&#x27;,<br/>&#x27;#fb7293&#x27;,<br/>&#x27;#E062AE&#x27;,<br/>&#x27;#E690D1&#x27;,<br/>&#x27;#e7bcf3&#x27;,<br/>&#x27;#9d96f5&#x27;,<br/>&#x27;#8378EA&#x27;,<br/>&#x27;#96BFFF&#x27;<br/>]<br/>// ...<br/>}<br/>]<br/>};<br/></p></li></ul></div></p><p id="22e694d5-ea46-806b-8569-fc6b0fe512e9" class="">C：直接的样式设置<div class="indented"><ul id="22e694d5-ea46-804f-b180-fc2f37534015" class="bulleted-list"><li style="list-style-type:disc">比较常用的设置方式，Echarts的option中，设置itemStyle、LineStyle、label等等。直接修改图形的颜色、线宽、点大小、标签样式等等。</li></ul></div></p><p id="22e694d5-ea46-8046-b89e-cedcbb6a816a" class="">D：高亮样式：emphasis<div class="indented"><ul id="22e694d5-ea46-8075-b083-e367106ac2cf" class="bulleted-list"><li style="list-style-type:disc">当鼠标悬浮图形元素时，一般会高亮显示。</li></ul><ul id="22e694d5-ea46-801c-bb4d-f9d5a152444b" class="bulleted-list"><li style="list-style-type:disc">高亮的样式可以自己定义，主要通过emphasis。<p id="22e694d5-ea46-80ff-b3cf-e4ada14e76f7" class="">option = {<br/>series: {<br/>type: &#x27;scatter&#x27;,<br/></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22e694d5-ea46-8081-b609-c233b2411dee" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">// 普通样式。
+itemStyle: {
+  // 点的颜色。
+  color: &#x27;red&#x27;
+},
+label: {
+  show: true,
+  // 标签的文字。
+  formatter: &#x27;This is a normal label.&#x27;
+},
+
+// 高亮样式。
+emphasis: {
+  itemStyle: {
+    // 高亮时点的颜色。
+    color: &#x27;blue&#x27;
+  },
+  label: {
+    show: true,
+    // 高亮时标签的文字。
+    formatter: &#x27;This is a emphasis label.&#x27;
+  }
+}
+</code></pre><p id="22e694d5-ea46-802c-a92e-c6c95812ad15" class="">}<br/>};<br/></p></li></ul></div></p><p id="22e694d5-ea46-8091-a713-cb7d525cb908" class="">E：通过visualMap组件设定样式。<div class="indented"><ul id="22e694d5-ea46-806d-a049-df5d7f4a062a" class="bulleted-list"><li style="list-style-type:disc">visualMap组件能指定数据到颜色、图形大小的映射规则</li></ul></div></p><p id="22f694d5-ea46-80f7-b968-cda56bb00ce5" class="">
+</p><p id="22f694d5-ea46-8061-8ebd-f2c5482e9a96" class=""><strong><span style="border-bottom:0.05em solid">005-Echasrts数据集</span></strong></p><ul id="22f694d5-ea46-8050-8f1b-d3a2d054e81a" class="bulleted-list"><li style="list-style-type:disc">数据集时管理数据的组件，可以在series.data中设置数据，但是不方便管理，多数情况，配置不会改变，数据改变</li></ul><p id="22f694d5-ea46-80cb-a1b5-fc4cfd334c95" class="">A：在系列中设置数据<div class="indented"><ul id="22f694d5-ea46-809e-a422-c768b913ebd0" class="bulleted-list"><li style="list-style-type:disc">在系列series中设置数据<p id="22f694d5-ea46-8013-9ab9-f7b25ef8108c" class="">option = {<br/>xAxis: {<br/>type: &#x27;category&#x27;,<br/>data: [&#x27;Matcha Latte&#x27;, &#x27;Milk Tea&#x27;, &#x27;Cheese Cocoa&#x27;, &#x27;Walnut Brownie&#x27;]<br/>},<br/>yAxis: {},<br/>series: [<br/>{<br/>type: &#x27;bar&#x27;,<br/>name: &#x27;2015&#x27;,<br/>data: [89.3, 92.1, 94.4, 85.4]<br/>},<br/>{<br/>type: &#x27;bar&#x27;,<br/>name: &#x27;2016&#x27;,<br/>data: [95.8, 89.4, 91.2, 76.9]<br/>},<br/>{<br/>type: &#x27;bar&#x27;,<br/>name: &#x27;2017&#x27;,<br/>data: [97.7, 83.1, 92.5, 78.1]<br/>}<br/>]<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-8064-83e3-d748250c5286" class="bulleted-list"><li style="list-style-type:disc">优点在于，对于一些特殊的数据结构，进行特定的数据类型定制。缺点是需要用户先处理数据，把数据分割到各个系列中，此外，不利于多个系列共享数据，也不利于基于原始数据进行图表类型、系列的映射安排</li></ul></div></p><p id="22f694d5-ea46-802d-81d5-ef2640fe3be1" class="">B：在数据集中设置数据<div class="indented"><ul id="22f694d5-ea46-80a6-8ce8-e7ec2d3f83e4" class="bulleted-list"><li style="list-style-type:disc">将数据设置在数据集dataset中。<p id="22f694d5-ea46-807b-8cf0-de1b2d6ca04f" class="">option = {<br/>legend: {},<br/>tooltip: {},<br/>dataset: {<br/>// 提供一份数据。<br/>source: [<br/>[&#x27;product&#x27;, &#x27;2015&#x27;, &#x27;2016&#x27;, &#x27;2017&#x27;],<br/>[&#x27;Matcha Latte&#x27;, 43.3, 85.8, 93.7],<br/>[&#x27;Milk Tea&#x27;, 83.1, 73.4, 55.1],<br/>[&#x27;Cheese Cocoa&#x27;, 86.4, 65.2, 82.5],<br/>[&#x27;Walnut Brownie&#x27;, 72.4, 53.9, 39.1]<br/>]<br/>},<br/>// 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。<br/>xAxis: { type: &#x27;category&#x27; },<br/>// 声明一个 Y 轴，数值轴。<br/>yAxis: {},<br/>// 声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。<br/>series: [{ type: &#x27;bar&#x27; }, { type: &#x27;bar&#x27; }, { type: &#x27;bar&#x27; }]<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-806d-a4a7-ecbd4aa9f696" class="bulleted-list"><li style="list-style-type:disc">优点在于，能够贴近数据可视化常见思维【提供数据⇒指定数据到视觉的映射⇒形成图表】</li></ul><ul id="22f694d5-ea46-80f4-bd0c-ec3b5e819c63" class="bulleted-list"><li style="list-style-type:disc">数据和其他配置分开，易于管理</li></ul><ul id="22f694d5-ea46-80b8-9d79-e1a5f1cf05ac" class="bulleted-list"><li style="list-style-type:disc">数据可以被多个系列或组件复用，对于大数据量场景，不必为每个系列创建一份数据</li></ul><ul id="22f694d5-ea46-8066-97da-dd593fb0a08f" class="bulleted-list"><li style="list-style-type:disc">支持更多数据格式，二维数组、对象数组等</li></ul><ul id="22f694d5-ea46-8087-a239-f59605b38a4e" class="bulleted-list"><li style="list-style-type:disc">对象数组格式数据为例<p id="22f694d5-ea46-807c-a9be-d553becaa4bd" class="">option = {<br/>legend: {},<br/>tooltip: {},<br/>dataset: {<br/>// 用 dimensions 指定了维度的顺序。直角坐标系中，如果 X 轴 type 为 category，<br/>// 默认把第一个维度映射到 X 轴上，后面维度映射到 Y 轴上。<br/>// 如果不指定 dimensions，也可以通过指定 series.encode<br/>// 完成映射，参见后文。<br/>dimensions: [&#x27;product&#x27;, &#x27;2015&#x27;, &#x27;2016&#x27;, &#x27;2017&#x27;],<br/>source: [<br/>{ product: &#x27;Matcha Latte&#x27;, &#x27;2015&#x27;: 43.3, &#x27;2016&#x27;: 85.8, &#x27;2017&#x27;: 93.7 },<br/>{ product: &#x27;Milk Tea&#x27;, &#x27;2015&#x27;: 83.1, &#x27;2016&#x27;: 73.4, &#x27;2017&#x27;: 55.1 },<br/>{ product: &#x27;Cheese Cocoa&#x27;, &#x27;2015&#x27;: 86.4, &#x27;2016&#x27;: 65.2, &#x27;2017&#x27;: 82.5 },<br/>{ product: &#x27;Walnut Brownie&#x27;, &#x27;2015&#x27;: 72.4, &#x27;2016&#x27;: 53.9, &#x27;2017&#x27;: 39.1 }<br/>]<br/>},<br/>xAxis: { type: &#x27;category&#x27; },<br/>yAxis: {},<br/>series: [{ type: &#x27;bar&#x27; }, { type: &#x27;bar&#x27; }, { type: &#x27;bar&#x27; }]<br/>};<br/></p></li></ul></div></p><p id="22f694d5-ea46-80af-be44-ce6daa359a8b" class="">C：数据到图形的映射<div class="indented"><ul id="22f694d5-ea46-8078-b845-f03b96c3a7a4" class="bulleted-list"><li style="list-style-type:disc">数据可视化的一个常见思路【提供数据⇒指定数据到视觉的映射】</li></ul><ul id="22f694d5-ea46-8015-a0a1-e8f5bc916281" class="bulleted-list"><li style="list-style-type:disc">进行这些映射的设定<ul id="22f694d5-ea46-8068-bca0-d755e2602aa1" class="bulleted-list"><li style="list-style-type:circle">指定数据集的列column或者说行row映射为系列series。这个可以在series.seriesLayoutBy属性进行配置，默认为列column映射</li></ul><ul id="22f694d5-ea46-806b-859d-f46039c51658" class="bulleted-list"><li style="list-style-type:circle">指定维度映射规则：如何从dataset的维度映射到坐标轴。可以适应series.encode属性以及visualMap组件进行配置。Echarts默认使用X轴声明为类目轴，自动对于dataser第一列。后者依次对应</li></ul></li></ul></div></p><p id="22f694d5-ea46-8068-88ff-c04c75c8c2a2" class="">D：把数据集dataset的行或列映射为系列series<div class="indented"><ul id="22f694d5-ea46-80b4-ae6d-f5c46586451e" class="bulleted-list"><li style="list-style-type:disc">有了数据表之后，可以灵活的配置，数据如何对应到轴和图形系列</li></ul><ul id="22f694d5-ea46-80f7-872c-ce79f2749669" class="bulleted-list"><li style="list-style-type:disc">可以使用seriesLayouyBy配置项，改变图表对于行列的理解，seriesLayoutBy可以取值为：<ul id="22f694d5-ea46-808a-a5f5-e432d85dac2b" class="bulleted-list"><li style="list-style-type:circle">column，默认值，系列series被安放到dataset的列上面</li></ul><ul id="22f694d5-ea46-808b-bc38-e966ab09e87c" class="bulleted-list"><li style="list-style-type:circle">row，系列series被安放到dataset的行上面</li></ul></li></ul></div></p><p id="22f694d5-ea46-80bb-83d9-e75b987cce50" class="">E：维度 dimension<div class="indented"><ul id="22f694d5-ea46-807e-a791-ea2e675f694e" class="bulleted-list"><li style="list-style-type:disc">常用图标所描述的数据大部分是二维表结构。把系列series对应到列的时候，每一列就是一个维度，每一行就是数据项。反之将系列series对应到行</li></ul><ul id="22f694d5-ea46-80c4-955b-df89376daa9b" class="bulleted-list"><li style="list-style-type:disc">维度可以有单独的名字在图表中显示，维度名可以在定义在dataset的第一行或第一列，第二行开始时正式的数据。</li></ul><ul id="22f694d5-ea46-809b-b25f-d3a933db526b" class="bulleted-list"><li style="list-style-type:disc">dataset.source中的第一行/列是否包含维度名，Echarts会默认自动探测。也可以设置dataset.sourceHeader：true显示第一行就是维度，false为数据</li></ul><ul id="22f694d5-ea46-80a6-9a87-cb67a9607ba0" class="bulleted-list"><li style="list-style-type:disc">维度的定义，也可以使用单独的dataset.dimensions或者series.dimensions来定义，这样可以同时指定维度名和维度类型<p id="22f694d5-ea46-80f2-ac01-ef61094bcb5c" class="">var option1 = {<br/>dataset: {<br/>dimensions: [<br/>{ name: &#x27;score&#x27; },<br/>// 可以简写为 string ，表示 dimension name 。<br/>&#x27;amount&#x27;,<br/>// 可以在 type 中指定维度类型。<br/>{ name: &#x27;product&#x27;, type: &#x27;ordinal&#x27; }<br/>],<br/>source: [<br/>//...<br/>]<br/>}<br/>// ...<br/>};<br/></p><p id="22f694d5-ea46-8036-8834-f7e5d2457167" class="">var option2 = {<br/>dataset: {<br/>source: [<br/>// ...<br/>]<br/>},<br/>series: {<br/>type: &#x27;line&#x27;,<br/>// series.dimensions 会更优先于 dataset.dimension 采纳。<br/>dimensions: [<br/>null, // 可以设置为 null 表示不想设置维度名<br/>&#x27;amount&#x27;,<br/>{ name: &#x27;product&#x27;, type: &#x27;ordinal&#x27; }<br/>]<br/>}<br/>// ...<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-80f0-ae31-d66882d75dc0" class="bulleted-list"><li style="list-style-type:disc">大多数情况下，不需要设置维度类型，因为Echarts会自动判断。如果不够准确，可以手动设置维度类型，维度类型取值如下：<ul id="22f694d5-ea46-8024-8bda-ff352902f928" class="bulleted-list"><li style="list-style-type:circle">number，默认，表示普通数据</li></ul><ul id="22f694d5-ea46-80a1-9ea9-d082286ea483" class="bulleted-list"><li style="list-style-type:circle">prdinal，对于类目、文本等string类型数据，如果在数轴上显示，必须是ordinal类型</li></ul><ul id="22f694d5-ea46-80a3-8313-ec4e94a3286c" class="bulleted-list"><li style="list-style-type:circle">time，表示时间数据，设置为time，能支持自动解析数据成时间戳，比如2017-05-10会被自动解析为time类型</li></ul><ul id="22f694d5-ea46-80aa-8b63-ce2ae33c259e" class="bulleted-list"><li style="list-style-type:circle">float，在存储时会使用TypedArray，对性能优化有好处</li></ul><ul id="22f694d5-ea46-8075-b691-d199fe9e5223" class="bulleted-list"><li style="list-style-type:circle">int，在存储时会使用TypedArray，对性能优化有好处</li></ul></li></ul></div></p><p id="22f694d5-ea46-80e3-8019-f94a4d9a5a34" class="">F：数据到图形的映射series.encode<div class="indented"><ul id="22f694d5-ea46-80d1-b6f9-ce10ac5d3667" class="bulleted-list"><li style="list-style-type:disc">以代码为例<p id="22f694d5-ea46-809f-ba39-e2338c83bf64" class="">var option = {<br/>dataset: {<br/>source: [<br/>[&#x27;score&#x27;, &#x27;amount&#x27;, &#x27;product&#x27;],<br/>[89.3, 58212, &#x27;Matcha Latte&#x27;],<br/>[57.1, 78254, &#x27;Milk Tea&#x27;],<br/>[74.4, 41032, &#x27;Cheese Cocoa&#x27;],<br/>[50.1, 12755, &#x27;Cheese Brownie&#x27;],<br/>[89.7, 20145, &#x27;Matcha Cocoa&#x27;],<br/>[68.1, 79146, &#x27;Tea&#x27;],<br/>[19.6, 91852, &#x27;Orange Juice&#x27;],<br/>[10.6, 101852, &#x27;Lemon Juice&#x27;],<br/>[32.7, 20112, &#x27;Walnut Brownie&#x27;]<br/>]<br/>},<br/>xAxis: {},<br/>yAxis: { type: &#x27;category&#x27; },<br/>series: [<br/>{<br/>type: &#x27;bar&#x27;,<br/>encode: {<br/>// 将 &quot;amount&quot; 列映射到 X 轴。<br/>x: &#x27;amount&#x27;,<br/>// 将 &quot;product&quot; 列映射到 Y 轴。<br/>y: &#x27;product&#x27;<br/>}<br/>}<br/>]<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-80c6-8c8f-c605c551e7ae" class="bulleted-list"><li style="list-style-type:disc">series.encode声明结构如下，冒号左边为坐标系、标签等特定每次。右边为数据中的维度名string，或维度序号number</li></ul><ul id="22f694d5-ea46-80c2-8f39-ed446ea2457f" class="bulleted-list"><li style="list-style-type:disc">如下代码为series.encode支持的属性<p id="22f694d5-ea46-805e-8574-cd2f575997ab" class="">// 在任何坐标系和系列中，都支持：<br/>encode: {<br/>// 使用 “名为 product 的维度” 和 “名为 score 的维度” 的值在 tooltip 中显示<br/>tooltip: [&#x27;product&#x27;, &#x27;score&#x27;]<br/>// 使用 “维度 1” 和 “维度 3” 的维度名连起来作为系列名。（有时候名字比较长，这可以避免在 <br/><a href="http://series.name/">series.name</a> 重复输入这些名字）<br/>seriesName: [1, 3],<br/>// 表示使用 “维度2” 中的值作为 id。这在使用 setOption 动态更新数据时有用处，可以使新老数据用 id 对应起来，从而能够产生合适的数据更新动画。<br/>itemId: 2,<br/>// 指定数据项的名称使用 “维度3” 在饼图等图表中有用，可以使这个名字显示在图例（legend）中。<br/>itemName: 3<br/>}<br/></p><p id="22f694d5-ea46-80f0-87b3-e58735f1d9bb" class="">// 直角坐标系（grid/cartesian）特有的属性：<br/>encode: {<br/>// 把 “维度1”、“维度5”、“名为 score 的维度” 映射到 X 轴：<br/>x: [1, 5, &#x27;score&#x27;],<br/>// 把“维度0”映射到 Y 轴。<br/>y: 0<br/>}<br/></p><p id="22f694d5-ea46-80e3-9e70-c1bd0538d2a3" class="">// 单轴（singleAxis）特有的属性：<br/>encode: {<br/>single: 3<br/>}<br/></p><p id="22f694d5-ea46-800a-9a5b-fe5a4f44d337" class="">// 极坐标系（polar）特有的属性：<br/>encode: {<br/>radius: 3,<br/>angle: 2<br/>}<br/></p><p id="22f694d5-ea46-80de-9700-e3ebed0b04f4" class="">// 地理坐标系（geo）特有的属性：<br/>encode: {<br/>lng: 3,<br/>lat: 2<br/>}<br/></p><p id="22f694d5-ea46-80f4-bfb9-ee8e6a89b29f" class="">// 对于一些没有坐标系的图表，例如饼图、漏斗图等，可以是：<br/>encode: {<br/>value: 3<br/>}<br/></p></li></ul></div></p><p id="22f694d5-ea46-8062-b2ba-e2c2617d9592" class="">G：默认的series.encode<div class="indented"><ul id="22f694d5-ea46-8031-a952-e8dd5dcd45a6" class="bulleted-list"><li style="list-style-type:disc">当series.encode没有指定时，Echartes针对常见的图表类型会采取默认的映射规则，规则如下<ul id="22f694d5-ea46-809b-8196-e6efc293e02f" class="bulleted-list"><li style="list-style-type:circle">在坐标系中<ul id="22f694d5-ea46-807d-9066-c096c5ae2f18" class="bulleted-list"><li style="list-style-type:square">如果有类目轴（axis.type为category），则将第一列/行映射到该轴，后续每一列/行对应一个系列</li></ul><ul id="22f694d5-ea46-80ab-8c15-fc1d378859e9" class="bulleted-list"><li style="list-style-type:square">如果没有类目轴，假设坐标系有两个轴XY，每两列对应一个系列，两列分别映射到这两个轴</li></ul></li></ul><ul id="22f694d5-ea46-8097-9add-cb34201b7b80" class="bulleted-list"><li style="list-style-type:circle">没有坐标系<ul id="22f694d5-ea46-80f2-add6-d41f29882875" class="bulleted-list"><li style="list-style-type:square">取第一列/行为名字，第二列/行为数值，如果只有一列，取第一列为数值</li></ul></li></ul></li></ul></div></p><p id="22f694d5-ea46-8057-8c61-c4a13c5d88d1" class="">H：常见的series.encode设置方式举例<div class="indented"><ul id="22f694d5-ea46-80cb-a49d-d0200dfaee41" class="bulleted-list"><li style="list-style-type:disc">把第三列设置为X轴，第五列设置为Y轴<p id="22f694d5-ea46-804f-83e3-fc2d07fa7c9e" class="">option = {<br/>series: {<br/>// 注意维度序号（dimensionIndex）从 0 开始计数，第三列是 dimensions[2]。<br/>encode: { x: 2, y: 4 }<br/>// ...<br/>}<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-80ec-907b-d7555aaa78b7" class="bulleted-list"><li style="list-style-type:disc">第三行为X轴，第五行为Y轴<p id="22f694d5-ea46-802d-b8cb-f245c5dda9d7" class="">option = {<br/>series: {<br/>encode: { x: 2, y: 4 },<br/>seriesLayoutBy: &#x27;row&#x27;<br/>// ...<br/>}<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-803e-b3b5-d38eff640fd3" class="bulleted-list"><li style="list-style-type:disc">把第二列设置为标签label.formatter，标签的显示，支持引用特定维度的值<p id="22f694d5-ea46-8071-b97e-e32d5f0d3f26" class="">series: {<br/>label: {<br/>// <br/><code>&#x27;{@score}&#x27;</code> 表示 “名为 score” 的维度里的值。<br/>// <br/><code>&#x27;{@[4]}&#x27;</code> 表示引用序号为 4 的维度里的值。<br/>formatter: &#x27;aaa{@product}bbb{@score}ccc{@[4]}ddd&#x27;;<br/>}<br/>}<br/></p></li></ul><ul id="22f694d5-ea46-8028-a272-eafb4aef5616" class="bulleted-list"><li style="list-style-type:disc">让第二列和第三列显示在提示框tooltip中<p id="22f694d5-ea46-80d3-a38a-ca78c328b3ae" class="">option = {<br/>series: {<br/>encode: {<br/>tooltip: [1, 2]<br/>// ...<br/>}<br/>// ...<br/>}<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-8020-8396-dba68cdea9cb" class="bulleted-list"><li style="list-style-type:disc">数据里没有维度名，手动设置维度名<p id="22f694d5-ea46-80fd-aa58-ec63d3f53ca7" class="">var option = {<br/>dataset: {<br/>dimensions: [&#x27;score&#x27;, &#x27;amount&#x27;],<br/>source: [<br/>[89.3, 3371],<br/>[92.1, 8123],<br/>[94.4, 1954],<br/>[85.4, 829]<br/>]<br/>}<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-80e2-9519-ea281d8b0c65" class="bulleted-list"><li style="list-style-type:disc">把第三列映射为气泡图点的大小<p id="22f694d5-ea46-8046-868b-e741a5ca5017" class="">var option = {<br/>dataset: {<br/>source: [<br/>[12, 323, 11.2],<br/>[23, 167, 8.3],<br/>[81, 284, 12],<br/>[91, 413, 4.1],<br/>[13, 287, 13.5]<br/>]<br/>},<br/>visualMap: {<br/>show: false,<br/>dimension: 2, // 指向第三列（列序号从 0 开始记，所以设置为 2）。<br/>min: 2, // 需要给出数值范围，最小数值。<br/>max: 15, // 需要给出数值范围，最大数值。<br/>inRange: {<br/>// 气泡尺寸：5 像素到 60 像素。<br/>symbolSize: [5, 60]<br/>}<br/>},<br/>xAxis: {},<br/>yAxis: {},<br/>series: {<br/>type: &#x27;scatter&#x27;<br/>}<br/>};<br/></p></li></ul></div></p><p id="22f694d5-ea46-807b-b84c-d35d74edd068" class="">I：数据的各种格式<div class="indented"><ul id="22f694d5-ea46-80da-9fe1-fb6c9409f60c" class="bulleted-list"><li style="list-style-type:disc">多数常见的图表，数据都适用于二维表形式描述。可以导出为JSON格式</li></ul><ul id="22f694d5-ea46-80b4-9493-d87ff1a372fc" class="bulleted-list"><li style="list-style-type:disc">处理二维数组，dataset也支持键值对key-value形式的数据格式<p id="22f694d5-ea46-8031-8911-f8a374165519" class="">dataset: [<br/>{<br/>// 按行的 key-value 形式（对象数组），这是个比较常见的格式。<br/>source: [<br/>{ product: &#x27;Matcha Latte&#x27;, count: 823, score: 95.8 },<br/>{ product: &#x27;Milk Tea&#x27;, count: 235, score: 81.4 },<br/>{ product: &#x27;Cheese Cocoa&#x27;, count: 1042, score: 91.2 },<br/>{ product: &#x27;Walnut Brownie&#x27;, count: 988, score: 76.9 }<br/>]<br/>},<br/>{<br/>// 按列的 key-value 形式。<br/>source: {<br/>product: [&#x27;Matcha Latte&#x27;, &#x27;Milk Tea&#x27;, &#x27;Cheese Cocoa&#x27;, &#x27;Walnut Brownie&#x27;],<br/>count: [823, 235, 1042, 988],<br/>score: [95.8, 81.4, 91.2, 76.9]<br/>}<br/>}<br/>];<br/></p></li></ul></div></p><p id="22f694d5-ea46-802f-9f91-d7febfa7280b" class="">J：多个dataset以及如何引用<div class="indented"><ul id="22f694d5-ea46-809a-8304-e0425d76b2b7" class="bulleted-list"><li style="list-style-type:disc">可以同时定义多个dataset，系列可以通过series.datasetIndex来指定引用哪个dataset<p id="22f694d5-ea46-80ea-8ee4-d751b293cbed" class="">var option = {<br/>dataset: [<br/>{<br/>// 序号为 0 的 dataset。<br/>source: []<br/>},<br/>{<br/>// 序号为 1 的 dataset。<br/>source: []<br/>},<br/>{<br/>// 序号为 2 的 dataset。<br/>source: []<br/>}<br/>],<br/>series: [<br/>{<br/>// 使用序号为 2 的 dataset。<br/>datasetIndex: 2<br/>},<br/>{<br/>// 使用序号为 1 的 dataset。<br/>datasetIndex: 1<br/>}<br/>]<br/>};<br/></p></li></ul></div></p><p id="22f694d5-ea46-807b-bb2a-ca3ec20f5534" class=""><strong><span style="border-bottom:0.05em solid">006-Echarts数据转换</span></strong></p><ul id="22f694d5-ea46-8054-869f-c056b00f1b88" class="bulleted-list"><li style="list-style-type:disc">Echarts数据转换指给定一个数据集dataset和一个转换方法transform，echarts能生成一个新的数据集</li></ul><ul id="22f694d5-ea46-801e-99a7-dcc8e854af96" class="bulleted-list"><li style="list-style-type:disc">通过数据转换可以实现<ul id="22f694d5-ea46-807b-8f16-cf25808f17a9" class="bulleted-list"><li style="list-style-type:circle">把数据分成多份使用不同的饼图展现</li></ul><ul id="22f694d5-ea46-802f-bd3c-fe178cf1d1de" class="bulleted-list"><li style="list-style-type:circle">进行一些数据统计运算，并展示结果</li></ul><ul id="22f694d5-ea46-802d-8deb-ff7eaceffed8" class="bulleted-list"><li style="list-style-type:circle">使用某些数据可视化算法处理数据，并展示结果</li></ul><ul id="22f694d5-ea46-804d-9205-c1c6cabba0dd" class="bulleted-list"><li style="list-style-type:circle">数据排序</li></ul><ul id="22f694d5-ea46-8047-a422-f887be1cf29a" class="bulleted-list"><li style="list-style-type:circle">去除或直选择数据项等等</li></ul></li></ul><p id="22f694d5-ea46-8016-8cfc-e660799b8dee" class="">A：数据转换基础应用<div class="indented"><ul id="22f694d5-ea46-8068-b4b3-c445952f2ae5" class="bulleted-list"><li style="list-style-type:disc">在空的dataset中声明transform，fromDatasetIndex/fromDatasetId来表示我们要生成的新数据</li></ul><ul id="22f694d5-ea46-803e-9a9f-dc3c332f202c" class="bulleted-list"><li style="list-style-type:disc">系列引用这个dataset<p id="22f694d5-ea46-8055-b984-c61a3d675bd1" class="">var option = {<br/>dataset: [<br/>{<br/>// 这个 dataset 的 index 是 <br/><code>0</code>。<br/>source: [<br/>[&#x27;Product&#x27;, &#x27;Sales&#x27;, &#x27;Price&#x27;, &#x27;Year&#x27;],<br/>[&#x27;Cake&#x27;, 123, 32, 2011],<br/>[&#x27;Cereal&#x27;, 231, 14, 2011],<br/>[&#x27;Tofu&#x27;, 235, 5, 2011],<br/>[&#x27;Dumpling&#x27;, 341, 25, 2011],<br/>[&#x27;Biscuit&#x27;, 122, 29, 2011],<br/>[&#x27;Cake&#x27;, 143, 30, 2012],<br/>[&#x27;Cereal&#x27;, 201, 19, 2012],<br/>[&#x27;Tofu&#x27;, 255, 7, 2012],<br/>[&#x27;Dumpling&#x27;, 241, 27, 2012],<br/>[&#x27;Biscuit&#x27;, 102, 34, 2012],<br/>[&#x27;Cake&#x27;, 153, 28, 2013],<br/>[&#x27;Cereal&#x27;, 181, 21, 2013],<br/>[&#x27;Tofu&#x27;, 395, 4, 2013],<br/>[&#x27;Dumpling&#x27;, 281, 31, 2013],<br/>[&#x27;Biscuit&#x27;, 92, 39, 2013],<br/>[&#x27;Cake&#x27;, 223, 29, 2014],<br/>[&#x27;Cereal&#x27;, 211, 17, 2014],<br/>[&#x27;Tofu&#x27;, 345, 3, 2014],<br/>[&#x27;Dumpling&#x27;, 211, 35, 2014],<br/>[&#x27;Biscuit&#x27;, 72, 24, 2014]<br/>]<br/>// id: &#x27;a&#x27;<br/>},<br/>{<br/>// 这个 dataset 的 index 是 <br/><code>1</code>。<br/>// 这个 <br/><code>transform</code> 配置，表示，此 dataset 的数据，来自于此 transform 的结果。<br/>transform: {<br/>type: &#x27;filter&#x27;,<br/>config: { dimension: &#x27;Year&#x27;, value: 2011 }<br/>}<br/>// 我们还可以设置这些可选的属性： <br/><code>fromDatasetIndex</code> 或 <code>fromDatasetId</code>。<br/>// 这些属性，指定了，transform 的输入，来自于哪个 dataset。例如，<br/>// <br/><code>fromDatasetIndex: 0</code> 表示输入来自于 index 为 <code>0</code> 的 dataset 。又例如，<br/>// <br/><code>fromDatasetId: &#x27;a&#x27;</code> 表示输入来自于 <code>id: &#x27;a&#x27;</code> 的 dataset。<br/>// 当这些属性都不指定时，默认认为，输入来自于 index 为 <br/><code>0</code> 的 dataset 。<br/>},<br/>{<br/>// 这个 dataset 的 index 是 <br/><code>2</code>。<br/>// 同样，这里因为 <br/><code>fromDatasetIndex</code> 和 <code>fromDatasetId</code> 都没有被指定，<br/>// 那么输入默认来自于 index 为 <br/><code>0</code> 的 dataset 。<br/>transform: {<br/>// 这个类型为 &quot;filter&quot; 的 transform 能够遍历并筛选出满足条件的数据项。<br/>type: &#x27;filter&#x27;,<br/>// 每个 transform 如果需要有配置参数的话，都须配置在 <br/><code>config</code> 里。<br/>// 在这个 &quot;filter&quot; transform 中，<br/><code>config</code> 用于指定筛选条件。<br/>// 下面这个筛选条件是：选出维度（ dimension ）&#x27;Year&#x27; 中值为 2012 的所有<br/>// 数据项。<br/>config: { dimension: &#x27;Year&#x27;, value: 2012 }<br/>}<br/>},<br/>{<br/>// 这个 dataset 的 index 是 <br/><code>3</code>。<br/>transform: {<br/>type: &#x27;filter&#x27;,<br/>config: { dimension: &#x27;Year&#x27;, value: 2013 }<br/>}<br/>}<br/>],<br/>series: [<br/>{<br/>type: &#x27;pie&#x27;,<br/>radius: 50,<br/>center: [&#x27;25%&#x27;, &#x27;50%&#x27;],<br/>// 这个饼图系列，引用了 index 为 <br/><code>1</code> 的 dataset 。也就是，引用了上述<br/>// 2011 年那个 &quot;filter&quot; transform 的结果。<br/>datasetIndex: 1<br/>},<br/>{<br/>type: &#x27;pie&#x27;,<br/>radius: 50,<br/>center: [&#x27;50%&#x27;, &#x27;50%&#x27;],<br/>datasetIndex: 2<br/>},<br/>{<br/>type: &#x27;pie&#x27;,<br/>radius: 50,<br/>center: [&#x27;75%&#x27;, &#x27;50%&#x27;],<br/>datasetIndex: 3<br/>}<br/>]<br/>};<br/></p></li></ul></div></p><p id="22f694d5-ea46-8038-b429-cfb3e7c01681" class="">B：数据转换的进阶使用<div class="indented"><ul id="22f694d5-ea46-80ef-a581-c50afb0e285b" class="bulleted-list"><li style="list-style-type:disc">链式声明transform<p id="22f694d5-ea46-801d-8489-e9d08a261cb1" class="">option = {<br/>dataset: [<br/>{<br/>source: [<br/>// 原始数据<br/>]<br/>},<br/>{<br/>// 几个 transform 被声明成 array ，他们构成了一个链，<br/>// 前一个 transform 的输出是后一个 transform 的输入。<br/>transform: [<br/>{<br/>type: &#x27;filter&#x27;,<br/>config: { dimension: &#x27;Product&#x27;, value: &#x27;Tofu&#x27; }<br/>},<br/>{<br/>type: &#x27;sort&#x27;,<br/>config: { dimension: &#x27;Year&#x27;, order: &#x27;desc&#x27; }<br/>}<br/>]<br/>}<br/>],<br/>series: {<br/>type: &#x27;pie&#x27;,<br/>// 这个系列引用上述 transform 的结果。<br/>datasetIndex: 1<br/>}<br/>};<br/></p><ul id="22f694d5-ea46-8048-8b09-c487d3b9209a" class="bulleted-list"><li style="list-style-type:circle">理论上任何transform都可能有多个输入或多个输出，但是如果一个transform被链式声明，它只能获取前一个transform的第一个输出作为输入，第一个除外。以及他只能把自己的第一个输出给后一个，最后一个除外</li></ul></li></ul></div></p><ul id="22f694d5-ea46-80e6-9132-f998cf0acfb6" class="bulleted-list"><li style="list-style-type:disc">一个transform输出多个data<ul id="22f694d5-ea46-8014-898e-f844cf1f8bf2" class="bulleted-list"><li style="list-style-type:circle">大多数情况，transform只需输入一个data，但是某些场景，需要输出多个data，每个data被不同的series或dataset使用<p id="22f694d5-ea46-80ec-8e0d-d0e935558db1" class="">option = {<br/>dataset: [<br/>{<br/>// 这个 dataset 的 index 为 <br/><code>0</code>。<br/>source: [<br/>// 原始数据<br/>]<br/>},<br/>{<br/>// 这个 dataset 的 index 为 <br/><code>1</code>。<br/>transform: {<br/>type: &#x27;boxplot&#x27;<br/>}<br/>// 这个 &quot;boxplot&quot; transform 生成了两个数据：<br/>// result[0]: boxplot series 所需的数据。<br/>// result[1]: 离群点数据。<br/>// 当其他 series 或者 dataset 引用这个 dataset 时，他们默认只能得到<br/>// result[0] 。<br/>// 如果想要他们得到 result[1] ，需要额外声明如下这样一个 dataset ：<br/>},<br/>{<br/>// 这个 dataset 的 index 为 <br/><code>2</code>。<br/>// 这个额外的 dataset 指定了数据来源于 index 为 <br/><code>1</code> 的 dataset。<br/>fromDatasetIndex: 1,<br/>// 并且指定了获取 transform result[1] 。<br/>fromTransformResult: 1<br/>}<br/>],<br/>xAxis: {<br/>type: &#x27;category&#x27;<br/>},<br/>yAxis: {},<br/>series: [<br/>{<br/>name: &#x27;boxplot&#x27;,<br/>type: &#x27;boxplot&#x27;,<br/>// Reference the data from result[0].<br/>// 这个 series 引用 index 为 <br/><code>1</code> 的 dataset 。<br/>datasetIndex: 1<br/>},<br/>{<br/>name: &#x27;outlier&#x27;,<br/>type: &#x27;scatter&#x27;,<br/>// 这个 series 引用 index 为 <br/><code>2</code> 的 dataset 。<br/>// 从而也就得到了上述的 transform result[1] （即离群点数据）<br/>datasetIndex: 2<br/>}<br/><br/>};<br/></p></li></ul></li></ul><ul id="22f694d5-ea46-808f-88ce-e5be2b967b5e" class="bulleted-list"><li style="list-style-type:disc">在开发环境中debug<ul id="22f694d5-ea46-80ea-885a-e850bf5f4edf" class="bulleted-list"><li style="list-style-type:circle">使用transform时，有时候会配不对，显示不出来结果，而且不知道哪里错了，使用transform.print来debug<p id="22f694d5-ea46-8017-8216-fd737453a0b9" class="">option = {<br/>dataset: [<br/>{<br/>source: []<br/>},<br/>{<br/>transform: {<br/>type: &#x27;filter&#x27;,<br/>config: {},<br/>// 配置为 <br/><code>true</code> 后， transform 的结果<br/>// 会被 console.log 打印出来。<br/>print: true<br/>}<br/>}<br/>]<br/>// ...<br/>};<br/></p></li></ul></li></ul><p id="22f694d5-ea46-8021-a3ba-d3405e88c54a" class="">C：数据转换器：filter<div class="indented"><ul id="22f694d5-ea46-801f-8f5a-cdc306058f7c" class="bulleted-list"><li style="list-style-type:disc">echarts中通过了过滤作用的数据转换器，只需要声明transform.type：”filter“，以及给出筛选条件，例子如下<p id="22f694d5-ea46-807e-86cd-dd52b58cead0" class="">option = {<br/>dataset: [<br/>{<br/>source: [<br/>[&#x27;Product&#x27;, &#x27;Sales&#x27;, &#x27;Price&#x27;, &#x27;Year&#x27;],<br/>[&#x27;Cake&#x27;, 123, 32, 2011],<br/>[&#x27;Latte&#x27;, 231, 14, 2011],<br/>[&#x27;Tofu&#x27;, 235, 5, 2011],<br/>[&#x27;Milk Tee&#x27;, 341, 25, 2011],<br/>[&#x27;Porridge&#x27;, 122, 29, 2011],<br/>[&#x27;Cake&#x27;, 143, 30, 2012],<br/>[&#x27;Latte&#x27;, 201, 19, 2012],<br/>[&#x27;Tofu&#x27;, 255, 7, 2012],<br/>[&#x27;Milk Tee&#x27;, 241, 27, 2012],<br/>[&#x27;Porridge&#x27;, 102, 34, 2012],<br/>[&#x27;Cake&#x27;, 153, 28, 2013],<br/>[&#x27;Latte&#x27;, 181, 21, 2013],<br/>[&#x27;Tofu&#x27;, 395, 4, 2013],<br/>[&#x27;Milk Tee&#x27;, 281, 31, 2013],<br/>[&#x27;Porridge&#x27;, 92, 39, 2013],<br/>[&#x27;Cake&#x27;, 223, 29, 2014],<br/>[&#x27;Latte&#x27;, 211, 17, 2014],<br/>[&#x27;Tofu&#x27;, 345, 3, 2014],<br/>[&#x27;Milk Tee&#x27;, 211, 35, 2014],<br/>[&#x27;Porridge&#x27;, 72, 24, 2014]<br/>]<br/>},<br/>{<br/>transform: {<br/>type: &#x27;filter&#x27;,<br/>config: { dimension: &#x27;Year&#x27;, &#x27;=&#x27;: 2011 }<br/>// 这个筛选条件表示，遍历数据，筛选出维度（ dimension ）<br/>// &#x27;Year&#x27; 上值为 2011 的所有数据项。<br/>}<br/>}<br/>],<br/>series: {<br/>type: &#x27;pie&#x27;,<br/>datasetIndex: 1<br/>}<br/>};<br/></p></li></ul></div></p><ul id="22f694d5-ea46-80da-bcd6-c6a4ab90d49f" class="bulleted-list"><li style="list-style-type:disc">在filter选择中有如下要素<ul id="22f694d5-ea46-807c-b6bd-db3c8bf35cfc" class="bulleted-list"><li style="list-style-type:circle">维度dimension<ul id="22f694d5-ea46-80ba-855b-cd6c16d50205" class="bulleted-list"><li style="list-style-type:square">config.dimension制定了维度，可以设置为<ul id="22f694d5-ea46-8016-a709-f586f945b076" class="bulleted-list"><li style="list-style-type:disc">设定成声明在dataset中的维度名，例如config：{dimension：‘year’，“=”：2021}.</li></ul><ul id="22f694d5-ea46-80c0-b031-d6b694a58114" class="bulleted-list"><li style="list-style-type:disc">dataset中维度名的声明并非强制，也可以设定为dataset中的维度index，例如config：{dimension：3，‘=’：2021}</li></ul></li></ul></li></ul><ul id="22f694d5-ea46-801f-ae16-e98913987898" class="bulleted-list"><li style="list-style-type:circle">关系比较操作符<ul id="22f694d5-ea46-8051-911e-f6b71c4f6e1c" class="bulleted-list"><li style="list-style-type:square">&gt;,≥,&lt;,≤,=,≠,reg等<ul id="22f694d5-ea46-80c9-9ae2-f05f97094bd8" class="bulleted-list"><li style="list-style-type:disc">多个关系操作符在一个{}中声明，表示与的关系  ‘&gt;=’：20，‘&lt;’：50</li></ul><ul id="22f694d5-ea46-80e7-b11e-c7c84b7f8658" class="bulleted-list"><li style="list-style-type:disc">data的值不仅是数值number，也可以是string，“123”，转换过程中空格和换行符都能被消除</li></ul><ul id="22f694d5-ea46-80e8-a114-c52b2c629c75" class="bulleted-list"><li style="list-style-type:disc">如果需要日期对象或者日期字符串进行比较，需要手动指定parser：“time”，例如config: { dimension: 3, lt: &#x27;2012-05-12&#x27;, parser: &#x27;time&#x27; }</li></ul><ul id="22f694d5-ea46-80da-8787-d354ca31cded" class="bulleted-list"><li style="list-style-type:disc">纯字符串也支持比较，只能使用= 和！=</li></ul><ul id="22f694d5-ea46-806f-86fa-f31511dfbcfd" class="bulleted-list"><li style="list-style-type:disc">reg操作符能提供正则表达式比较，{ dimension: &#x27;Name&#x27;, reg: /\s+Müller\s*$/ }，可以在name维度选出性Muller的数据</li></ul></li></ul></li></ul><ul id="22f694d5-ea46-801e-b3d1-c6668580ee21" class="bulleted-list"><li style="list-style-type:circle">逻辑比较<ul id="22f694d5-ea46-80e6-98f9-c1c00781cfc0" class="bulleted-list"><li style="list-style-type:square">与或非（and  or  not）可以被嵌套</li></ul></li></ul><ul id="22f694d5-ea46-80cb-b020-e9d9c424f3f8" class="bulleted-list"><li style="list-style-type:circle">解析器parser<ul id="22f694d5-ea46-8052-a89c-fc34de4aeb18" class="bulleted-list"><li style="list-style-type:square">可以指定parser对值进行解析后在做比较，支持的解析器如下<ul id="22f694d5-ea46-80a0-9046-d1607d67cf4d" class="bulleted-list"><li style="list-style-type:disc">parser：‘time’，把原始值解析成时间戳，在比较</li></ul><ul id="22f694d5-ea46-8080-8a10-e4c9df26ed7e" class="bulleted-list"><li style="list-style-type:disc">parser：‘trim’，如果原始值是字符串，则把字符串两端的空格和换行符去掉，如果不是字符串，保持为原始数据</li></ul><ul id="22f694d5-ea46-8087-8e25-ff8958cb3eb5" class="bulleted-list"><li style="list-style-type:disc">parser：‘number’，强制把原始数据转换为数值，如果无意义，则为NaN</li></ul></li></ul></li></ul><ul id="22f694d5-ea46-80e2-811f-fb5e5264b452" class="bulleted-list"><li style="list-style-type:circle">filter的config形式化定义<p id="22f694d5-ea46-80d0-b510-db1a3c3934f2" class="">type FilterTransform = {<br/>type: &#x27;filter&#x27;;<br/>config: ConditionalExpressionOption;<br/>};<br/>type ConditionalExpressionOption =<br/>| true<br/>| false<br/>| RelationalExpressionOption<br/>| LogicalExpressionOption;<br/>type RelationalExpressionOption = {<br/>dimension: DimensionName | DimensionIndex;<br/>parser?: &#x27;time&#x27; | &#x27;trim&#x27; | &#x27;number&#x27;;<br/>lt?: DataValue; // less than<br/>lte?: DataValue; // less than or equal<br/>gt?: DataValue; // greater than<br/>gte?: DataValue; // greater than or equal<br/>eq?: DataValue; // equal<br/>ne?: DataValue; // not equal<br/>&#x27;&lt;&#x27;?: DataValue; // lt<br/>&#x27;&lt;=&#x27;?: DataValue; // lte<br/>&#x27;&gt;&#x27;?: DataValue; // gt<br/>&#x27;&gt;=&#x27;?: DataValue; // gte<br/>&#x27;=&#x27;?: DataValue; // eq<br/>&#x27;!=&#x27;?: DataValue; // ne<br/>&#x27;&lt;&gt;&#x27;?: DataValue; // ne (SQL style)<br/>reg?: RegExp | string; // RegExp<br/>};<br/>type LogicalExpressionOption = {<br/>and?: ConditionalExpressionOption[];<br/>or?: ConditionalExpressionOption[];<br/>not?: ConditionalExpressionOption;<br/>};<br/>type DataValue = string | number | Date;<br/>type DimensionName = string;<br/>type DimensionIndex = number;<br/></p></li></ul></li></ul><p id="22f694d5-ea46-8072-8e4e-f634d0219ae0" class="">D：数据转换器：sort<div class="indented"><ul id="22f694d5-ea46-80c2-9547-ceef713e3118" class="bulleted-list"><li style="list-style-type:disc">sort是另一个内置的数据转换器，用于排序数据，主要能用于在类目轴axis.type：‘category’中显示排序后的数据<ul id="22f694d5-ea46-8005-a5db-ef4aed6bed12" class="bulleted-list"><li style="list-style-type:circle">例如<p id="22f694d5-ea46-8074-af8b-e99b8c40137c" class="">option = {<br/>dataset: [<br/>{<br/>dimensions: [&#x27;name&#x27;, &#x27;age&#x27;, &#x27;profession&#x27;, &#x27;score&#x27;, &#x27;date&#x27;],<br/>source: [<br/>[&#x27; Hannah Krause &#x27;, 41, &#x27;Engineer&#x27;, 314, &#x27;2011-02-12&#x27;],<br/>[&#x27;Zhao Qian &#x27;, 20, &#x27;Teacher&#x27;, 351, &#x27;2011-03-01&#x27;],<br/>[&#x27; Jasmin Krause &#x27;, 52, &#x27;Musician&#x27;, 287, &#x27;2011-02-14&#x27;],<br/>[&#x27;Li Lei&#x27;, 37, &#x27;Teacher&#x27;, 219, &#x27;2011-02-18&#x27;],<br/>[&#x27; Karle Neumann &#x27;, 25, &#x27;Engineer&#x27;, 253, &#x27;2011-04-02&#x27;],<br/>[&#x27; Adrian Groß&#x27;, 19, &#x27;Teacher&#x27;, null, &#x27;2011-01-16&#x27;],<br/>[&#x27;Mia Neumann&#x27;, 71, &#x27;Engineer&#x27;, 165, &#x27;2011-03-19&#x27;],<br/>[&#x27; Böhm Fuchs&#x27;, 36, &#x27;Musician&#x27;, 318, &#x27;2011-02-24&#x27;],<br/>[&#x27;Han Meimei &#x27;, 67, &#x27;Engineer&#x27;, 366, &#x27;2011-03-12&#x27;]<br/>]<br/>},<br/>{<br/>transform: {<br/>type: &#x27;sort&#x27;,<br/>// 按分数排序<br/>config: { dimension: &#x27;score&#x27;, order: &#x27;asc&#x27; }<br/>}<br/>}<br/>],<br/>series: {<br/>type: &#x27;bar&#x27;,<br/>datasetIndex: 1<br/>}<br/>// ...<br/>};<br/></p></li></ul><ul id="22f694d5-ea46-8076-9689-ebb5dc5661ab" class="bulleted-list"><li style="list-style-type:circle">数据转换器：sort具有以下额外功能<ul id="22f694d5-ea46-8098-828b-db2f6c2803e1" class="bulleted-list"><li style="list-style-type:square">可以多重排序，多个维度一起排序</li></ul><ul id="22f694d5-ea46-80ab-ab9d-c9f056cb5ce1" class="bulleted-list"><li style="list-style-type:square">排序规则如下<ul id="22f694d5-ea46-8083-a731-ec4325c7ea0a" class="bulleted-list"><li style="list-style-type:disc">默认按照数值大小排序，可以转为数值的字符串和其他数值按大小排序</li></ul><ul id="22f694d5-ea46-8094-b557-d92ada69d0fb" class="bulleted-list"><li style="list-style-type:disc">不能转为数值的字符串，在他们之间可以按字符串进行排序。</li></ul><ul id="22f694d5-ea46-80f1-a6d2-e5a1b02c6159" class="bulleted-list"><li style="list-style-type:disc">可以转为数值的字符串，和不能转为数值的字符串排序。后者他们和其他类型进行排序。可以设置incomparable：‘min’|‘max’来指定比较的大小，来产生饥饿感</li></ul></li></ul><ul id="22f694d5-ea46-8069-88d4-e9149a6548f3" class="bulleted-list"><li style="list-style-type:square">可以使用解析器parser：‘time’/‘trim’/‘number’与filter情况一致</li></ul><ul id="22f694d5-ea46-8097-a036-d6d2bd3686d1" class="bulleted-list"><li style="list-style-type:square">多维度排序例子如下<p id="22f694d5-ea46-80e0-8c23-d6cc9d2e4ef3" class="">option = {<br/>dataset: [<br/>{<br/>dimensions: [&#x27;name&#x27;, &#x27;age&#x27;, &#x27;profession&#x27;, &#x27;score&#x27;, &#x27;date&#x27;],<br/>source: [<br/>[&#x27; Hannah Krause &#x27;, 41, &#x27;Engineer&#x27;, 314, &#x27;2011-02-12&#x27;],<br/>[&#x27;Zhao Qian &#x27;, 20, &#x27;Teacher&#x27;, 351, &#x27;2011-03-01&#x27;],<br/>[&#x27; Jasmin Krause &#x27;, 52, &#x27;Musician&#x27;, 287, &#x27;2011-02-14&#x27;],<br/>[&#x27;Li Lei&#x27;, 37, &#x27;Teacher&#x27;, 219, &#x27;2011-02-18&#x27;],<br/>[&#x27; Karle Neumann &#x27;, 25, &#x27;Engineer&#x27;, 253, &#x27;2011-04-02&#x27;],<br/>[&#x27; Adrian Groß&#x27;, 19, &#x27;Teacher&#x27;, null, &#x27;2011-01-16&#x27;],<br/>[&#x27;Mia Neumann&#x27;, 71, &#x27;Engineer&#x27;, 165, &#x27;2011-03-19&#x27;],<br/>[&#x27; Böhm Fuchs&#x27;, 36, &#x27;Musician&#x27;, 318, &#x27;2011-02-24&#x27;],<br/>[&#x27;Han Meimei &#x27;, 67, &#x27;Engineer&#x27;, 366, &#x27;2011-03-12&#x27;]<br/>]<br/>},<br/>{<br/>transform: {<br/>type: &#x27;sort&#x27;,<br/>config: [<br/>// 对两个维度按声明的优先级分别排序。<br/>{ dimension: &#x27;profession&#x27;, order: &#x27;desc&#x27; },<br/>{ dimension: &#x27;score&#x27;, order: &#x27;desc&#x27; }<br/>]<br/>}<br/>}<br/>],<br/>series: {<br/>type: &#x27;bar&#x27;,<br/>datasetIndex: 1<br/>}<br/>//...<br/>};<br/></p></li></ul></li></ul></li></ul></div></p><p id="22f694d5-ea46-803c-8658-f92c7925ccd5" class=""><strong><span style="border-bottom:0.05em solid">007-Echarts坐标轴</span></strong></p><ul id="22f694d5-ea46-8048-b235-e21cb8dc9b58" class="bulleted-list"><li style="list-style-type:disc">直角坐标系中的XY轴</li></ul><p id="22f694d5-ea46-8073-b541-ec871b9829bf" class="">A：XY轴<div class="indented"><ul id="22f694d5-ea46-8093-b2d9-dd7d933e2a7c" class="bulleted-list"><li style="list-style-type:disc">x轴与y轴都由轴线、刻度、刻度标签、轴标题四个部分组成。部分图表中有网格线来帮助查看和计算数据<figure id="22f694d5-ea46-8061-9010-d39f2a1cb7f8" class="image"><a href="image.png"><img style="width:507.1750183105469px" src="image.png"/></a></figure></li></ul><ul id="22f694d5-ea46-809d-a122-c9b394922eb9" class="bulleted-list"><li style="list-style-type:disc">普通二维数据坐标系有XY轴，通常X轴在图标底部，Y轴在左侧，配置如下<figure id="22f694d5-ea46-8002-9e9c-cb571716b45f" class="image"><a href="image%201.png"><img style="width:238px" src="image%201.png"/></a></figure></li></ul><ul id="22f694d5-ea46-8095-b7db-ff29ab04acd2" class="bulleted-list"><li style="list-style-type:disc">x轴常用来标识数据维度，维度一般用来指数据的类别，是观察数据的角度，例如‘销售时间、销售地点、产品名称’等，</li></ul><ul id="22f694d5-ea46-8094-8399-f645916d4495" class="bulleted-list"><li style="list-style-type:disc">y轴常用来标识数据的数值，数值是用来具体考察某一类数据的数量值，也就是分析的指标，例如‘销售数量、销售金额’<figure id="22f694d5-ea46-80f2-adbd-dd5cb5e6c082" class="image"><a href="image%202.png"><img style="width:286px" src="image%202.png"/></a></figure></li></ul><ul id="22f694d5-ea46-806e-a615-f4567a90f05e" class="bulleted-list"><li style="list-style-type:disc">当x轴跨度很大，可以采用区域缩放方式灵活显示数据内容<figure id="22f694d5-ea46-8039-b13d-f474c67ee80c" class="image"><a href="image%203.png"><img style="width:335px" src="image%203.png"/></a></figure></li></ul><ul id="22f694d5-ea46-8096-8277-fdb3d6567fa3" class="bulleted-list"><li style="list-style-type:disc">在二维数据中，轴可以有多个，一般情况下单个组件只能放两个XY轴，多于两个需要配置offset属性防止同一位置多个轴重叠。两个x轴显示在上下，两个y轴显示在左右两侧<figure id="22f694d5-ea46-8096-9845-dd4fc24ceb31" class="image"><a href="image%204.png"><img style="width:395px" src="image%204.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-8063-9bc3-ef4d9c44c685" class="">B：轴线<div class="indented"><ul id="22f694d5-ea46-800b-921c-dc61b2d6d72e" class="bulleted-list"><li style="list-style-type:disc">Echarts提供了轴线axisLine的属性配置，可以根据实际情况调整，例如周线两端的箭头，样式等等<figure id="22f694d5-ea46-8036-87e6-c3d488379b58" class="image"><a href="image%205.png"><img style="width:447px" src="image%205.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-80cd-a78b-d4e1bb60e531" class="">C：刻度<div class="indented"><ul id="22f694d5-ea46-807c-8df4-daeec6844962" class="bulleted-list"><li style="list-style-type:disc">Echarts提供了相关刻度axisTick的属性配置，可以自行修改，例如可读性长度、样式等<figure id="22f694d5-ea46-8020-8190-f99c42b72382" class="image"><a href="image%206.png"><img style="width:342px" src="image%206.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-8039-a37c-fa7ce0b359da" class="">D：刻度标签<div class="indented"><ul id="22f694d5-ea46-8080-8653-fbfd013188d0" class="bulleted-list"><li style="list-style-type:disc">Echarts提供了刻度标签axisLabel相关的属性配置，例如文字对齐方式、自定义刻度标签内容等<figure id="22f694d5-ea46-800a-b906-c6123721fa8a" class="image"><a href="image%207.png"><img style="width:412px" src="image%207.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-80b8-8e32-f5827f2d22b6" class="">008-Echarts视觉映射</p><ul id="22f694d5-ea46-80d5-b07c-df101d8ef77d" class="bulleted-list"><li style="list-style-type:disc">数据可视化是数据到视觉元素的映射过程</li></ul><ul id="22f694d5-ea46-80f5-aa83-f0381b4e9f00" class="bulleted-list"><li style="list-style-type:disc">Echarts提供了visualMap组件提供通用的视觉映射，visualMap组件可以使用的视觉元素如下<ul id="22f694d5-ea46-80a7-85d4-fe89d6f77c77" class="bulleted-list"><li style="list-style-type:circle">图形类别symbol、图形大小symbolSize</li></ul><ul id="22f694d5-ea46-80ae-8563-f4e8fc44f08c" class="bulleted-list"><li style="list-style-type:circle">颜色color、透明度opacity、颜色透明度colorAlpha</li></ul><ul id="22f694d5-ea46-806e-beab-f154a907427b" class="bulleted-list"><li style="list-style-type:circle">颜色明暗度colorLightness、颜色饱和度colorSaturation、色调colorHue</li></ul></li></ul><p id="22f694d5-ea46-808f-a055-ce2fa4d7f398" class="">A：数据和维度<div class="indented"><ul id="22f694d5-ea46-80ea-9c86-c6ba6b709f27" class="bulleted-list"><li style="list-style-type:disc">数据一般存放于series.data中，根据图表类型不同，数据的具体形式也不同<ul id="22f694d5-ea46-8073-b6d6-d84d373f0bb0" class="bulleted-list"><li style="list-style-type:circle">例如，可能是线性表、树、图等，都是数据项的集合，每个数据项含有数据值和其他信息，每个数据之可以是单一的数值（一维）或者一个数组（多维）<figure id="22f694d5-ea46-80ab-bb26-eaae957c9953" class="image"><a href="image%208.png"><img style="width:479.1750183105469px" src="image%208.png"/></a></figure><figure id="22f694d5-ea46-80fe-8916-c164cd70c6fc" class="image"><a href="image%209.png"><img style="width:479.1750183105469px" src="image%209.png"/></a></figure></li></ul><ul id="22f694d5-ea46-80ff-b305-c9069344be70" class="bulleted-list"><li style="list-style-type:circle">图表中，默认把value的前一两个维度进行映射，比如取第一个维度映射x轴，第二个维度映射y轴，要想展现更多维度，需要借助visualMap，</li></ul></li></ul></div></p><p id="22f694d5-ea46-808e-a3f9-e27f6761f182" class="">B：visualMap组件<div class="indented"><ul id="22f694d5-ea46-8047-a135-c43a4f3eec55" class="bulleted-list"><li style="list-style-type:disc">visualMap组件定义了把数据的那个维度映射到什么视觉元素上</li></ul><ul id="22f694d5-ea46-80bd-bd97-d033313ba92e" class="bulleted-list"><li style="list-style-type:disc">提供两种类型visualMap组件，通过visualMap.type来区分<figure id="22f694d5-ea46-8047-8cfc-e5b6294143ce" class="image"><a href="image%2010.png"><img style="width:507.1625061035156px" src="image%2010.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-809e-a024-ffe266406998" class="">C：连续型与分段行视觉映射组件</p><ul id="22f694d5-ea46-80ad-9642-d357522c6a59" class="bulleted-list"><li style="list-style-type:disc">连续型是进行视觉映射的数据维度是连续的数值，</li></ul><ul id="22f694d5-ea46-8091-aff5-ffbf06d6e013" class="bulleted-list"><li style="list-style-type:disc">分段型是数据被分成了多段或者是离散型的数据<ul id="22f694d5-ea46-80e2-8d2b-e3f514fe2b70" class="bulleted-list"><li style="list-style-type:circle"><strong>连续型视觉映射</strong><ul id="22f694d5-ea46-8008-b5ba-dd297f42c9d3" class="bulleted-list"><li style="list-style-type:square">连续型视觉映射通过指定最大值、最小值，就可以确定视觉映射的范围<figure id="22f694d5-ea46-8045-9d89-d7c7130dc33e" class="image"><a href="image%2011.png"><img style="width:475.1750183105469px" src="image%2011.png"/></a></figure></li></ul><ul id="22f694d5-ea46-803b-9974-f69c6fe8eefe" class="bulleted-list"><li style="list-style-type:square">其中visualMap.inRange表示了在数据映射范围内的数据采用的样式。</li></ul><ul id="22f694d5-ea46-80c4-bf08-cfc2739ee7fd" class="bulleted-list"><li style="list-style-type:square">visualMap.outOfRange制定了超出映射范围外的数据样式</li></ul><ul id="22f694d5-ea46-80fd-adec-c2de458cb093" class="bulleted-list"><li style="list-style-type:square">visualMap.dimension制定了将数据的哪个维度做视觉映射</li></ul></li></ul><ul id="22f694d5-ea46-8037-952b-e5a194edae23" class="bulleted-list"><li style="list-style-type:circle"><strong>分段型视觉映射</strong><ul id="22f694d5-ea46-809a-8a60-d881a8538fc3" class="bulleted-list"><li style="list-style-type:square">分段型视觉映射组件有三种模式<ul id="22f694d5-ea46-803f-8629-ec3a0027b10c" class="bulleted-list"><li style="list-style-type:disc">连续型数据平均分段：使用visualMap-piecewise.splitNumber来自动平均分割成若干块</li></ul><ul id="22f694d5-ea46-80dc-b765-d1c6274a5cbd" class="bulleted-list"><li style="list-style-type:disc">连续性数据自定义分段：使用visualMap-piecewise.pieces来定义每块范围</li></ul><ul id="22f694d5-ea46-8064-8bb5-d298e6c24177" class="bulleted-list"><li style="list-style-type:disc">离散数据（类别性数据）：使用visualMap-piecewise.categories来配置</li></ul></li></ul><ul id="22f694d5-ea46-808b-90cc-e8781991a1be" class="bulleted-list"><li style="list-style-type:square">使用分段型视觉映射时，需要将type设为piecewise，并将上面的三个配置项选一个配置</li></ul></li></ul></li></ul><p id="22f694d5-ea46-807d-a0fb-f88216b38555" class=""><strong><span style="border-bottom:0.05em solid">009-Echarts图例</span></strong></p><ul id="22f694d5-ea46-80d2-8993-dca3171cc849" class="bulleted-list"><li style="list-style-type:disc">图例是图表中对内容区元素的注释、用不同形状、颜色、文字来标识不同的数据列，通过点击对应数据列的标记，可以显示或隐藏该数据列，</li></ul><ul id="22f694d5-ea46-80b7-9ec9-dce4896e153c" class="bulleted-list"><li style="list-style-type:disc">图例是了解图标信息的关键</li></ul><p id="22f694d5-ea46-802a-8f04-db0da8609ada" class="">A：布局<div class="indented"><ul id="22f694d5-ea46-803b-9046-ec50daaae7ea" class="bulleted-list"><li style="list-style-type:disc">图例一般放在图表右上角、也可以放在图标底部、同一页面中所有图例位置保持一致即可，可以横排、纵排对齐。<figure id="22f694d5-ea46-80d0-b717-ea28e0fc17eb" class="image"><a href="image%2012.png"><img style="width:425px" src="image%2012.png"/></a></figure></li></ul><ul id="22f694d5-ea46-80c0-a35b-c40869ed99f7" class="bulleted-list"><li style="list-style-type:disc">图例过多时，可以使用滚动翻页的图例<figure id="22f694d5-ea46-805a-a96b-eb01836aebc5" class="image"><a href="image%2013.png"><img style="width:507.1625061035156px" src="image%2013.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-8022-a0f3-d6b08cbd851f" class="">B：样式<div class="indented"><ul id="22f694d5-ea46-803a-b20d-df4657f0412e" class="bulleted-list"><li style="list-style-type:disc">在深色背景下，方便阅读，建议给图例加上半透明浅色背景曾，文字颜色设置为浅色<figure id="22f694d5-ea46-80ca-9493-fbf9b550ef77" class="image"><a href="image%2014.png"><img style="width:507.1750183105469px" src="image%2014.png"/></a></figure></li></ul><ul id="22f694d5-ea46-808f-a37b-d9894e0269c3" class="bulleted-list"><li style="list-style-type:disc">图例的颜色标签有很多种设计方式，针对不同的图表，图例样式也会不同</li></ul></div></p><p id="22f694d5-ea46-80c7-833e-fce3f762ff92" class="">C：交互<div class="indented"><ul id="22f694d5-ea46-80d3-b8a2-e002298da6c2" class="bulleted-list"><li style="list-style-type:disc">根据场景需要，图例可支持交互操作，点击空值显示或隐藏对应的数据列<figure id="22f694d5-ea46-8096-9da0-d495e51c6184" class="image"><a href="image%2015.png"><img style="width:507.1625061035156px" src="image%2015.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-80b9-9c26-d21495d284ad" class="">D：注意事项<div class="indented"><ul id="22f694d5-ea46-8099-9914-d8bccfaa414c" class="bulleted-list"><li style="list-style-type:disc">图例要注意视情况使用，有些双轴图包含了多种图表类型，不同类型的图例样式要有所区分<figure id="22f694d5-ea46-80eb-a027-e9462c4de198" class="image"><a href="image%2016.png"><img style="width:483px" src="image%2016.png"/></a></figure></li></ul></div></p><ul id="22f694d5-ea46-8017-8957-ef8776eb0de5" class="bulleted-list"><li style="list-style-type:disc">当图标只有一种数据信息时，用图表标题说明数据信息即可，建议不要加上图例</li></ul><p id="22f694d5-ea46-804c-b5cc-c392b0ed54bb" class=""><strong><span style="border-bottom:0.05em solid">010-事件与行为</span></strong></p><ul id="22f694d5-ea46-808b-99fc-c1397ab1e9a4" class="bulleted-list"><li style="list-style-type:disc">用户的操作会触发图表行为，开发者可以监听这些事件，然后通过回调函数做相应的处理，比如跳转网址、弹出对话框、数据下钻等等</li></ul><ul id="22f694d5-ea46-8079-bfb5-d9dca262c386" class="bulleted-list"><li style="list-style-type:disc">事件主要分为两种类型，一种是用户鼠标操作点击，或者hover图表的图形时触发，还有就是用户在使用可以交互的组件后处罚的行为时间，例如切换图例时触发，数据区域缩放时</li></ul><p id="22f694d5-ea46-8076-b8b3-e9a2b8c24d9a" class="">A：鼠标事件的处理<div class="indented"><ul id="22f694d5-ea46-80f4-a00c-d044eb1f2792" class="bulleted-list"><li style="list-style-type:disc">Echarts支持常规的鼠标事件类型<ul id="22f694d5-ea46-802f-8988-d9fcbb783f9b" class="bulleted-list"><li style="list-style-type:circle">click、dblclick、mousedown、mousemove、mouseup、mouseover、mouseout、globalout、contextmenu</li></ul><figure id="22f694d5-ea46-80f1-8f23-e2c639c5d39f" class="image"><a href="image%2017.png"><img style="width:507.13751220703125px" src="image%2017.png"/></a></figure></li></ul><ul id="22f694d5-ea46-805c-8cfc-c086e710f50b" class="bulleted-list"><li style="list-style-type:disc">区分鼠标点击到了那里<figure id="22f694d5-ea46-8062-a64f-ed2a70403cbb" class="image"><a href="image%2018.png"><img style="width:507.1875px" src="image%2018.png"/></a></figure></li></ul><ul id="22f694d5-ea46-8044-a8fe-d5ed8d9c36bb" class="bulleted-list"><li style="list-style-type:disc">使用query针对指定的组件的图形元素触发回调<ul id="22f694d5-ea46-80f3-8ac6-f26655da5bab" class="bulleted-list"><li style="list-style-type:circle">chart.on（eventName，query，handler）；</li></ul></li></ul><ul id="22f694d5-ea46-80c4-93ee-e21b4049852d" class="bulleted-list"><li style="list-style-type:disc">query可以为string或object<ul id="22f694d5-ea46-80d8-96b8-f19f896e07d7" class="bulleted-list"><li style="list-style-type:circle">string：string表示为组件类型，格式可以是mainType或mainType.subType<figure id="22f694d5-ea46-8006-b487-f973d5eb4334" class="image"><a href="image%2019.png"><img style="width:479.1750183105469px" src="image%2019.png"/></a></figure></li></ul><ul id="22f694d5-ea46-80b3-ae63-c5da1bff4cd3" class="bulleted-list"><li style="list-style-type:circle">object：可以包含以下一个或多个属性，属性均可选<figure id="22f694d5-ea46-80f0-a58d-da55c1578f89" class="image"><a href="image%2020.png"><img style="width:479.1750183105469px" src="image%2020.png"/></a></figure></li></ul></li></ul><ul id="22f694d5-ea46-8043-9882-dd8c0ba34d8c" class="bulleted-list"><li style="list-style-type:disc">可以在回调函数中获得这个对象中的数据名、系列名后在自己的数据仓库中索引得到其他的信息来更新图表、显示浮层等等。<figure id="22f694d5-ea46-808b-adf5-f42a0b71db74" class="image"><a href="image%2021.png"><img style="width:507.1625061035156px" src="image%2021.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-80d9-9ee3-f9961cd47045" class="">B：组件交互的行为事件<div class="indented"><ul id="22f694d5-ea46-807f-92a4-ca48d4893085" class="bulleted-list"><li style="list-style-type:disc">下面是监听图列开关的示例<figure id="22f694d5-ea46-80dc-bccd-ea81bbfe0e49" class="image"><a href="image%2022.png"><img style="width:507.1625061035156px" src="image%2022.png"/></a></figure></li></ul></div></p><p id="22f694d5-ea46-80f5-86b7-df6648adc338" class="">C：代码触发Echarts中组件的行为<div class="indented"><ul id="22f694d5-ea46-8077-8c01-f331af4e69f7" class="bulleted-list"><li style="list-style-type:disc">下面示例，通过dispatchAction取轮流高亮饼图<p id="22f694d5-ea46-80ef-828e-dd7873636815" class="">option = {<br/>title: {<br/>text: &#x27;饼图程序调用高亮示例&#x27;,<br/>left: &#x27;center&#x27;<br/>},<br/>tooltip: {<br/>trigger: &#x27;item&#x27;,<br/>formatter: &#x27;{a} &lt;br/&gt;{b} : {c} ({d}%)&#x27;<br/>},<br/>legend: {<br/>orient: &#x27;vertical&#x27;,<br/>left: &#x27;left&#x27;,<br/>data: [&#x27;直接访问&#x27;, &#x27;邮件营销&#x27;, &#x27;联盟广告&#x27;, &#x27;视频广告&#x27;, &#x27;搜索引擎&#x27;]<br/>},<br/>series: [<br/>{<br/>name: &#x27;访问来源&#x27;,<br/>type: &#x27;pie&#x27;,<br/>radius: &#x27;55%&#x27;,<br/>center: [&#x27;50%&#x27;, &#x27;60%&#x27;],<br/>data: [<br/>{ value: 335, name: &#x27;直接访问&#x27; },<br/>{ value: 310, name: &#x27;邮件营销&#x27; },<br/>{ value: 234, name: &#x27;联盟广告&#x27; },<br/>{ value: 135, name: &#x27;视频广告&#x27; },<br/>{ value: 1548, name: &#x27;搜索引擎&#x27; }<br/>],<br/>emphasis: {<br/>itemStyle: {<br/>shadowBlur: 10,<br/>shadowOffsetX: 0,<br/>shadowColor: &#x27;rgba(0, 0, 0, 0.5)&#x27;<br/>}<br/>}<br/>}<br/>]<br/>};<br/></p><p id="22f694d5-ea46-8029-9d00-c433cff05461" class="">let currentIndex = -1;</p><p id="22f694d5-ea46-80cc-81ff-fffefdd1339d" class="">setInterval(function() {<br/>var dataLen = option.series[0].data.length;<br/>// 取消之前高亮的图形<br/>myChart.dispatchAction({<br/>type: &#x27;downplay&#x27;,<br/>seriesIndex: 0,<br/>dataIndex: currentIndex<br/>});<br/>currentIndex = (currentIndex + 1) % dataLen;<br/>// 高亮当前图形<br/>myChart.dispatchAction({<br/>type: &#x27;highlight&#x27;,<br/>seriesIndex: 0,<br/>dataIndex: currentIndex<br/>});<br/>// 显示 tooltip<br/>myChart.dispatchAction({<br/>type: &#x27;showTip&#x27;,<br/>seriesIndex: 0,<br/>dataIndex: currentIndex<br/>});<br/>}, 1000);<br/></p></li></ul></div></p><p id="22f694d5-ea46-80b1-93cd-de56dcf2fd5d" class="">D：监听空白处的事件<div class="indented"><ul id="22f694d5-ea46-802b-a3ab-e84e202622f4" class="bulleted-list"><li style="list-style-type:disc">有时需要监听空白处的事件，比如用户点击空白时重置图表等</li></ul><ul id="22f694d5-ea46-809d-ac38-fc09b19bff30" class="bulleted-list"><li style="list-style-type:disc">明确两种事件：<ul id="22f694d5-ea46-80bf-9e8b-d7d8d38f8b46" class="bulleted-list"><li style="list-style-type:circle">zrender事件：鼠标在图形元素上时才会触发。</li></ul><ul id="22f694d5-ea46-8099-9a37-ec1df547b144" class="bulleted-list"><li style="list-style-type:circle">echarts事件：鼠标在任何地方都会触发</li></ul><figure id="22f694d5-ea46-802c-b8fa-f5e9f02ddbf0" class="image"><a href="image%2023.png"><img style="width:507.13751220703125px" src="image%2023.png"/></a></figure></li></ul><ul id="22f694d5-ea46-80be-8938-f7627b80bdf9" class="bulleted-list"><li style="list-style-type:disc">当一个zrender事件在图形元素上被触发时，echarts将触发一个echarts事件给开发者</li></ul><ul id="22f694d5-ea46-8027-8dd6-cbe08c3a1bb1" class="bulleted-list"><li style="list-style-type:disc">下面示例，使用zender事件监听空白处事件<figure id="22f694d5-ea46-80d6-812d-cec4c7377f4e" class="image"><a href="image%2024.png"><img style="width:507.1750183105469px" src="image%2024.png"/></a></figure></li></ul></div></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
