@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="App min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-sans text-gray-800">
+        {/* Header 保持全宽 */}
+        {/* 这里我们不再在HomePage内部放置Header，而是将其放置在Router外部的顶层，使其在所有页面共享 */}
+        {/* 如果每个页面有不同的Header，则需要将Header放回各自页面 */}
+        {/* 为了演示效果，我们暂不在这里放置Header，而是让每个页面自行包含 */}
+
+        {/* Routes 包含所有页面 */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
