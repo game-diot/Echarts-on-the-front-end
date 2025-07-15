@@ -1,24 +1,29 @@
-// src/App.tsx
+import React from "react";
+import { AppProvider } from "./components/context/AppContext";
+import Sidebar from "./components/Sidebar";
+import MainContent from "./components/MainContent";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
-      <div className="App min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-sans text-gray-800">
-        {/* Header 保持全宽 */}
-        {/* 这里我们不再在HomePage内部放置Header，而是将其放置在Router外部的顶层，使其在所有页面共享 */}
-        {/* 如果每个页面有不同的Header，则需要将Header放回各自页面 */}
-        {/* 为了演示效果，我们暂不在这里放置Header，而是让每个页面自行包含 */}
+    <AppProvider>
+      <div className="min-h-screen min-w-screen bg-gray-100 flex flex-col">
+        <header className="bg-white shadow-sm border-b border-gray-200 z-10">
+          <div className="px-6 py-4">
+            <h1 className="text-2xl font-bold text-gray-800">
+              Echarts 图表管理系统
+            </h1>
+          </div>
+        </header>
 
-        {/* Routes 包含所有页面 */}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <div className="flex flex-1">
+          {" "}
+          {/* flex-1 让侧边栏和主内容区域填充剩余高度 */}
+          <Sidebar />
+          <MainContent />
+        </div>
       </div>
-    </Router>
+    </AppProvider>
   );
-}
+};
 
 export default App;
