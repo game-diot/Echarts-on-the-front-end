@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts/core";
-import usaJson from "./USA-State.json";
+import usaJson from "./us-states.json";
 
 const MapChart001: React.FC = () => {
   const [option, setOption] = useState<any>(null);
