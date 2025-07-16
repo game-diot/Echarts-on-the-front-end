@@ -13,7 +13,7 @@ const GraphChart001: React.FC = () => {
     ["2017-03-14", 985],
   ];
 
-  const links = graphData.map((time,idx) => ({
+  const links = graphData.map((time, idx) => ({
     time,
     source: idx,
     target: idx + 1,
@@ -63,7 +63,7 @@ const GraphChart001: React.FC = () => {
       max: 1000,
       type: "piecewise",
       left: "center",
-      bottom: 20,
+      bottom: -5,
       inRange: {
         color: ["#5291FF", "#C7DBFF"],
       },
@@ -102,7 +102,7 @@ const GraphChart001: React.FC = () => {
   };
 
   return (
-    <ReactECharts option={option} style={{ height: 600, width: "100%" }} />
+    <ReactECharts option={option} style={{ height: 350, width: "100%" }} />
   );
 };
 

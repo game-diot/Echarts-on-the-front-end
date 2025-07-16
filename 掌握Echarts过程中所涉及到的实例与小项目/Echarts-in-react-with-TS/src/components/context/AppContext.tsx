@@ -140,14 +140,7 @@ const initialMockProjects: ChartProject[] = [
     createTime: new Date("2025-07-15T10:00:00Z"),
     updateTime: new Date("2025-07-15T14:30:00Z"),
   },
-  {
-    id: "calendar",
-    name: "日历坐标图",
-    type: "calendar",
-    config: {},
-    createTime: new Date("2025-07-15T10:00:00Z"),
-    updateTime: new Date("2025-07-15T14:30:00Z"),
-  },
+
   {
     id: "custom",
     name: "自定义图",

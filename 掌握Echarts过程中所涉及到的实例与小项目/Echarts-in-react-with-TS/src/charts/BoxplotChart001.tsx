@@ -5,7 +5,7 @@ const BoxplotChart001: React.FC = () => {
   const option = {
     title: [
       {
-        text: "Michelson-Morley Experiment",
+        text: "数据对比查看", // 标题统一默认格式
         left: "center",
       },
       {
@@ -17,10 +17,20 @@ const BoxplotChart001: React.FC = () => {
           fontSize: 14,
           lineHeight: 20,
         },
-        left: "10%",
+        left: "25%",
         top: "90%",
       },
     ],
+    toolbox: {
+      show: true,
+      left: 10,
+      bottom: 10,
+      feature: {
+        dataView: { readOnly: false, title: "数据视图" },
+        restore: { title: "刷新" },
+        saveAsImage: { title: "保存图片" },
+      },
+    },
     dataset: [
       {
         source: [
@@ -82,12 +92,12 @@ const BoxplotChart001: React.FC = () => {
     },
     series: [
       {
-        name: "boxplot",
+        name: "数据组1",
         type: "boxplot",
         datasetIndex: 1,
       },
       {
-        name: "outlier",
+        name: "数据组2",
         type: "scatter",
         datasetIndex: 2,
       },

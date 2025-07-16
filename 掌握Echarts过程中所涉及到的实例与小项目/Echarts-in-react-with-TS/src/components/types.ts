@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 // 所有支持的图表类型（统一管理）
 export type ChartType =
   | "bar"
+  | "usaJson"
   | "line"
   | "pie"
   | "scatter"

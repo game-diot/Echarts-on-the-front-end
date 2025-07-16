@@ -16,7 +16,6 @@ import {
   Funnel,
   Gauge,
   Waves,
-  Calendar,
   Shapes,
 } from "lucide-react";
 import type { ChartCategory } from "../types";
@@ -124,12 +123,6 @@ export const chartCategories: ChartCategory[] = [
     name: "河流图",
     icon: <Waves className="w-5 h-5" />,
     type: "river",
-  },
-  {
-    id: "calendar",
-    name: "日历图",
-    icon: <Calendar className="w-5 h-5" />,
-    type: "calendar",
   },
   {
     id: "custom",
