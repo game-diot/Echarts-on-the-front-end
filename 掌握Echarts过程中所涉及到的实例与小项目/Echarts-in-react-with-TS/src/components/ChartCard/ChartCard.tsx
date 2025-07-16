@@ -75,6 +75,15 @@ const ChartCard: React.FC<ChartCardProps> = ({ project }) => {
       <div className="w-full " style={{ height: 400, width: 400 }}>
         {renderChart()}
       </div>
+      {/* 右下角按钮 */}
+      <div className="flex justify-end mt-4">
+        <button
+          onClick={() => {}}
+          className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-3 py-1.5 rounded-md text-sm shadow"
+        >
+          查看详情
+        </button>
+      </div>
     </div>
   );
 };

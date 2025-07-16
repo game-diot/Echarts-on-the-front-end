@@ -29,7 +29,7 @@ export default function InfoDialog({ onClose }: { onClose: () => void }) {
         <div style={{ fontSize: "14px", color: "#444" }}>
           <p>
             本项目仅用于测试记录我学习过程中的关键节点，如 API
-            调用、前后端部署等。
+            调用、前后端部署等
           </p>
           <p>
             任何人都可以使用任意账号和密码进行注册与登录，发表看法仅用于演示与交互测试。

@@ -4,7 +4,7 @@ import { AppProvider } from "../../components/context/AppContext";
 import Sidebar from "../../components/Sidebar";
 import MainContent from "../../components/MainContent";
 import InfoDialog from "../../components/InfoDialog";
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   // 判断是否已经看过弹窗
   useEffect(() => {
@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
-    localStorage.setItem("hasSeenInfoDialog", "true"); // 持久记录
+    // localStorage.setItem("hasSeenInfoDialog", "true"); // 持久记录
   };
 
   return (
@@ -41,4 +41,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -44,7 +44,9 @@ const MainContent: React.FC = () => {
 
       <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(400px,1fr))]">
         {filteredProjects.map((project) => (
-          <ChartCard key={project.id} project={project} />
+          <div>
+            <ChartCard key={project.id} project={project} />
+          </div>
         ))}
       </div>
 
