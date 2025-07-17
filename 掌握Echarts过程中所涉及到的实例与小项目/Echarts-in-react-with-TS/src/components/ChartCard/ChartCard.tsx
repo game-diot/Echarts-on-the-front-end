@@ -18,12 +18,13 @@ import FunnelChart001 from "../../charts/FunnelChart001";
 import GaugeChart001 from "../../charts/GaugeChart001";
 import RiverChart001 from "../../charts/RiverChart001";
 import CustomChart001 from "../../charts/CustomChart001";
-
+import { useNavigate } from "react-router-dom";
 interface ChartCardProps {
   project: ChartProject;
 }
 
 const ChartCard: React.FC<ChartCardProps> = ({ project }) => {
+  const navigate = useNavigate();
   // 根据类型选择组件
   const renderChart = () => {
     switch (project.type) {
@@ -78,7 +79,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ project }) => {
       {/* 右下角按钮 */}
       <div className="flex justify-end mt-4">
         <button
-          onClick={() => {}}
+          onClick={() => navigate(`/charts/${project.type}`)}
           className="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white px-3 py-1.5 rounded-md text-sm shadow"
         >
           查看详情
