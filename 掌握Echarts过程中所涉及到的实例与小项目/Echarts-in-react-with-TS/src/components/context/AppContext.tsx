@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import type { ReactNode } from "react";
-import type { ChartProject, AppContextType } from "../types";
+import type { ChartProject, AppContextType } from "../homeTypes";
 
 // 初始图表项目
 const initialMockProjects: ChartProject[] = [

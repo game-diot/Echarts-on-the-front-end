@@ -18,7 +18,7 @@ import {
   Waves,
   Shapes,
 } from "lucide-react";
-import type { ChartCategory } from "../types";
+import type { ChartCategory } from "../homeTypes";
 
 export const chartCategories: ChartCategory[] = [
   { id: "all", name: "全部", icon: <Shapes className="w-5 h-5" /> },

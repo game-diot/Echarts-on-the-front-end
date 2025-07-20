@@ -1,5 +1,5 @@
 import React from "react";
-import type { ChartProject } from "../types";
+import type { ChartProject } from "../homeTypes";
 import LineChart001 from "../../charts/LineChart001";
 import BarChart001 from "../../charts/BarChart001";
 import PieChart001 from "../../charts/PieChart001";
