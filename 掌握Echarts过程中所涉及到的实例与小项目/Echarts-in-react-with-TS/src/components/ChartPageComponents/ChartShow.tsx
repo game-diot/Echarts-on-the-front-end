@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getChartByType } from "./chartUtils";
-import type { ChartMeta } from "../chartTypes";
+
 
 // 主展示组件
 const ChartShow: React.FC = () => {
