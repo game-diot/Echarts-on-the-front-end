@@ -28,23 +28,16 @@ export default function InfoDialog({ onClose }: { onClose: () => void }) {
         </h2>
         <div style={{ fontSize: "14px", color: "#444" }}>
           <p>
-            本项目仅用于测试记录我学习过程中的关键节点，如 API
-            调用、前后端部署等
+            本项目仅用于个人学习与测试，主要用于记录我在前端开发过程中对
+            <strong> ECharts 图表掌握、数据可视化实现 </strong>
+            等关键技能的掌握情况。
           </p>
           <p>
-            任何人都可以使用任意账号和密码进行注册与登录，发表看法仅用于演示与交互测试。
+            所有功能（如图表展示、图表页面跳转、注册登录）仅为学习目的提供，数据为模拟演示内容。
           </p>
+
           <p>
-            前端使用 <strong>Vercel</strong> 部署，后端使用{" "}
-            <strong>Render</strong> 部署。 由于 Render
-            存在冷启动延迟，您可能首次访问时看不到内容，
-            <span style={{ color: "#d9534f", fontWeight: "bold" }}>
-              需登录或注册后才能正常加载内容。
-            </span>
-          </p>
-          <p>
-            图片加载问题已通过 <strong>Cloudinary</strong> 解决，原先 Render
-            上的图片可能无法显示。
+            本项目不提供任何形式的保证，也不承担因使用本项目而产生的任何法律责任。
           </p>
         </div>
         <div style={{ textAlign: "right", marginTop: "20px" }}>

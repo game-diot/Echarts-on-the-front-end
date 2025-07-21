@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import { useParams } from "react-router-dom";
 import ChartPageHeader from "../../components/ChartPageComponents/ChartHeader";
 import ChartShow from "../../components/ChartPageComponents/ChartShow";
@@ -30,7 +31,9 @@ import CustomChart001 from "../../charts/CustomChart001";
 
 const ChartDetailPage: React.FC = () => {
   const { type } = useParams<{ type: string }>();
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // ✅ 加这一句即可解决
+  }, []);
   const chartMeta = getChartByType(type || "");
   const relatedCharts = getRelatedCharts(type || "", 3);
 
